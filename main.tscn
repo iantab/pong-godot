@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://b1mhxhh8oycib" path="res://GameManager.cs" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://bic8vn5vmlqbi" path="res://Paddle.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://d1lxq58jst3d3" path="res://Ball.cs" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://cj4377lf8skah" path="res://paddle_hit.wav" id="4_7mycd"]
+[ext_resource type="AudioStream" uid="uid://daiux77w0whgf" path="res://wall_hit.wav" id="5_272bh"]
+[ext_resource type="AudioStream" uid="uid://dxjeuyw11o0b7" path="res://score.wav" id="6_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_paddle"]
 size = Vector2(5, 20)
@@ -24,6 +27,7 @@ RightGoalPath = NodePath("RightGoal")
 Player1ScorePath = NodePath("Player1Score")
 Player2ScorePath = NodePath("Player2Score")
 MessageTextPath = NodePath("MessageText")
+ScorePlayerPath = NodePath("ScorePlayer")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=744995108]
 visible = false
@@ -61,6 +65,8 @@ shape = SubResource("RectangleShape2D_paddle")
 [node name="Ball" type="CharacterBody2D" parent="." unique_id=419130119]
 position = Vector2(216, 121)
 script = ExtResource("2_0xm2m")
+PaddleHitPlayerPath = NodePath("../PaddleHitPlayer")
+WallHitPlayerPath = NodePath("../WallHitPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=100000003]
 shape = SubResource("CircleShape2D_ball")
@@ -80,13 +86,13 @@ shape = SubResource("RectangleShape2D_wall")
 [node name="LeftGoal" type="Area2D" parent="." unique_id=2140630878]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=2092833096]
-position = Vector2(-10, 121)
+position = Vector2(-5, 121)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="RightGoal" type="Area2D" parent="." unique_id=809212274]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal" unique_id=2031594127]
-position = Vector2(442, 121)
+position = Vector2(437, 121)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Player1Score" type="Label" parent="." unique_id=1482058576]
@@ -113,3 +119,12 @@ offset_bottom = 204.0
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PaddleHitPlayer" type="AudioStreamPlayer" parent="." unique_id=1362176955]
+stream = ExtResource("4_7mycd")
+
+[node name="WallHitPlayer" type="AudioStreamPlayer" parent="." unique_id=1624795534]
+stream = ExtResource("5_272bh")
+
+[node name="ScorePlayer" type="AudioStreamPlayer" parent="." unique_id=1057428372]
+stream = ExtResource("6_5vw27")

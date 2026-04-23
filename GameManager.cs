@@ -12,6 +12,9 @@ public partial class GameManager : Node2D
     [Export] public NodePath Player2ScorePath;
     [Export] public NodePath MessageTextPath;
     [Export] public int PointsToWin = 5;
+    [Export] public NodePath ScorePlayerPath;
+
+    private AudioStreamPlayer scorePlayer;
 
     private Ball ball;
     private Label player1ScoreLabel;
@@ -37,6 +40,7 @@ public partial class GameManager : Node2D
         
         ball.Reset();
         messageLabel.Text = "Welcome to Pong!\nPress Enter to begin";
+        scorePlayer = GetNode<AudioStreamPlayer>(ScorePlayerPath);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -66,6 +70,7 @@ public partial class GameManager : Node2D
 
         player2Score++;
         UpdateScoreUI();
+        scorePlayer.Play();
         servingPlayer = 1;
         CheckWinOrServe(2);
     }
@@ -79,6 +84,7 @@ public partial class GameManager : Node2D
 
         player1Score++;
         UpdateScoreUI();
+        scorePlayer.Play();
         servingPlayer = 2;
         CheckWinOrServe(1);
     }

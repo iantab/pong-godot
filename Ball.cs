@@ -8,12 +8,18 @@ public partial class Ball : CharacterBody2D
 	[Export] public float SpeedUpFactor = 1.03f;
 	[Export] public float Radius = 2f;
 	[Export] public Color Color = Colors.White;
+	[Export] public NodePath PaddleHitPlayerPath;
+	[Export] public NodePath WallHitPlayerPath;
 
 	private Vector2 _startPosition;
+	private AudioStreamPlayer paddleHitPlayer;
+	private AudioStreamPlayer wallHitPlayer;
 
 	public override void _Ready()
 	{
 		_startPosition = Position;
+		paddleHitPlayer = GetNode<AudioStreamPlayer>(PaddleHitPlayerPath);
+		wallHitPlayer = GetNode<AudioStreamPlayer>(WallHitPlayerPath);
 		Serve(GD.Randf() < 0.5f ? -1 : 1);
 	}
 
@@ -39,10 +45,12 @@ public partial class Ball : CharacterBody2D
 		{
 			Velocity = new Vector2(
 				-Velocity.X * SpeedUpFactor, (float)GD.RandRange(-MaxStartSpeedY, MaxStartSpeedY));
+			paddleHitPlayer.Play();
 		}
 		else
 		{
 			Velocity = Velocity.Bounce(collision.GetNormal());
+			wallHitPlayer.Play();
 		}
 	}
 
