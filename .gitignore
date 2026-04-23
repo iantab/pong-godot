@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# .NET / C# build output
+bin/
+obj/
+
+# JetBrains Rider
+.idea/
+
+# Visual Studio / VS Code
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Legacy Godot 3 Mono cache
+.mono/
