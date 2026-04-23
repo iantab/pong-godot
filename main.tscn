@@ -34,3 +34,5 @@ DownKey = 4194322
 [node name="Ball" type="Node2D" parent="." unique_id=419130119]
 position = Vector2(216, 121)
 script = ExtResource("2_0xm2m")
+LeftPaddlePath = NodePath("../LeftPaddle")
+RightPaddlePath = NodePath("../RightPaddle")
