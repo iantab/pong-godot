@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Paddle : Node2D
+public partial class Paddle : AnimatableBody2D
 {
 	[Export] public Key UpKey = Key.W;
 	[Export] public Key DownKey = Key.S;
@@ -20,6 +20,7 @@ public partial class Paddle : Node2D
 		float direction = 0f;
 		if (Input.IsKeyPressed(UpKey)) direction = -1f;
 		else if (Input.IsKeyPressed(DownKey)) direction = 1f;
+		
 		Vector2 pos = Position;
 		pos.Y += direction * Speed * (float)delta;
 		

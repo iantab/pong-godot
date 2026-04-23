@@ -3,6 +3,18 @@
 [ext_resource type="Script" uid="uid://bic8vn5vmlqbi" path="res://Paddle.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://d1lxq58jst3d3" path="res://Ball.cs" id="2_0xm2m"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paddle"]
+size = Vector2(5, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ball"]
+radius = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(432, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(10, 243)
+
 [node name="Main" type="Node2D" unique_id=75954527]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=744995108]
@@ -21,18 +33,49 @@ text = "Hello Pong!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LeftPaddle" type="Node2D" parent="." unique_id=191781699]
+[node name="LeftPaddle" type="AnimatableBody2D" parent="." unique_id=191781699]
 position = Vector2(12, 121)
 script = ExtResource("1_ig7tw")
 
-[node name="RightPaddle" type="Node2D" parent="." unique_id=775741371]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle" unique_id=100000001]
+shape = SubResource("RectangleShape2D_paddle")
+
+[node name="RightPaddle" type="AnimatableBody2D" parent="." unique_id=775741371]
 position = Vector2(420, 121)
 script = ExtResource("1_ig7tw")
 UpKey = 4194320
 DownKey = 4194322
 
-[node name="Ball" type="Node2D" parent="." unique_id=419130119]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle" unique_id=100000002]
+shape = SubResource("RectangleShape2D_paddle")
+
+[node name="Ball" type="CharacterBody2D" parent="." unique_id=419130119]
 position = Vector2(216, 121)
 script = ExtResource("2_0xm2m")
-LeftPaddlePath = NodePath("../LeftPaddle")
-RightPaddlePath = NodePath("../RightPaddle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=100000003]
+shape = SubResource("CircleShape2D_ball")
+
+[node name="TopWall" type="StaticBody2D" parent="." unique_id=100000004]
+position = Vector2(216, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall" unique_id=100000005]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="BottomWall" type="StaticBody2D" parent="." unique_id=100000006]
+position = Vector2(216, 244)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=100000007]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightGoal" type="Area2D" parent="." unique_id=809212274]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal" unique_id=2031594127]
+position = Vector2(442, 121)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="LeftGoal" type="Area2D" parent="." unique_id=2140630878]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=2092833096]
+position = Vector2(-10, 121)
+shape = SubResource("RectangleShape2D_0xm2m")
