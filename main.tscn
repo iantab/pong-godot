@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cyhs1bdt8q1iv"]
 
-[ext_resource type="Script" uid="uid://b1mhxhh8oycib" path="res://GameManager.cs" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://bic8vn5vmlqbi" path="res://Paddle.cs" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://d1lxq58jst3d3" path="res://Ball.cs" id="2_0xm2m"]
-[ext_resource type="AudioStream" uid="uid://cj4377lf8skah" path="res://paddle_hit.wav" id="4_7mycd"]
-[ext_resource type="AudioStream" uid="uid://daiux77w0whgf" path="res://wall_hit.wav" id="5_272bh"]
-[ext_resource type="AudioStream" uid="uid://dxjeuyw11o0b7" path="res://score.wav" id="6_5vw27"]
+[ext_resource type="Script" uid="uid://b1mhxhh8oycib" path="res://src/GameManager.cs" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://bic8vn5vmlqbi" path="res://src/Paddle.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://d1lxq58jst3d3" path="res://src/Ball.cs" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://cj4377lf8skah" path="res://assets/paddle_hit.wav" id="4_7mycd"]
+[ext_resource type="AudioStream" uid="uid://daiux77w0whgf" path="res://assets/wall_hit.wav" id="5_272bh"]
+[ext_resource type="AudioStream" uid="uid://dxjeuyw11o0b7" path="res://assets/score.wav" id="6_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_paddle"]
 size = Vector2(5, 20)
