@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cyhs1bdt8q1iv"]
 
+[ext_resource type="Script" uid="uid://b1mhxhh8oycib" path="res://GameManager.cs" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://bic8vn5vmlqbi" path="res://Paddle.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://d1lxq58jst3d3" path="res://Ball.cs" id="2_0xm2m"]
 
@@ -16,8 +17,16 @@ size = Vector2(432, 2)
 size = Vector2(10, 243)
 
 [node name="Main" type="Node2D" unique_id=75954527]
+script = ExtResource("1_h2yge")
+BallPath = NodePath("Ball")
+LeftGoalPath = NodePath("LeftGoal")
+RightGoalPath = NodePath("RightGoal")
+Player1ScorePath = NodePath("Player1Score")
+Player2ScorePath = NodePath("Player2Score")
+MessageTextPath = NodePath("MessageText")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=744995108]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -68,14 +77,39 @@ position = Vector2(216, 244)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=100000007]
 shape = SubResource("RectangleShape2D_wall")
 
+[node name="LeftGoal" type="Area2D" parent="." unique_id=2140630878]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=2092833096]
+position = Vector2(-10, 121)
+shape = SubResource("RectangleShape2D_0xm2m")
+
 [node name="RightGoal" type="Area2D" parent="." unique_id=809212274]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal" unique_id=2031594127]
 position = Vector2(442, 121)
 shape = SubResource("RectangleShape2D_0xm2m")
 
-[node name="LeftGoal" type="Area2D" parent="." unique_id=2140630878]
+[node name="Player1Score" type="Label" parent="." unique_id=1482058576]
+offset_left = 166.0
+offset_top = 40.0
+offset_right = 176.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 32
+text = "0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=2092833096]
-position = Vector2(-10, 121)
-shape = SubResource("RectangleShape2D_0xm2m")
+[node name="Player2Score" type="Label" parent="." unique_id=236598657]
+offset_left = 256.0
+offset_top = 40.0
+offset_right = 266.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="MessageText" type="Label" parent="." unique_id=1436020896]
+offset_left = 117.0
+offset_top = 173.0
+offset_right = 317.0
+offset_bottom = 204.0
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1

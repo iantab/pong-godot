@@ -54,7 +54,7 @@ public partial class Ball : CharacterBody2D
 		Velocity = new Vector2(vx, vy);
 	}
 
-	private void Reset()
+	public void Reset()
 	{
 		Position = _startPosition;
 		Velocity = Vector2.Zero;
