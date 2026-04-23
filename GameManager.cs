@@ -11,6 +11,7 @@ public partial class GameManager : Node2D
     [Export] public NodePath Player1ScorePath;
     [Export] public NodePath Player2ScorePath;
     [Export] public NodePath MessageTextPath;
+    [Export] public int PointsToWin = 5;
 
     private Ball ball;
     private Label player1ScoreLabel;
@@ -20,6 +21,7 @@ public partial class GameManager : Node2D
     private int player2Score;
     private Label messageLabel;
     private int servingPlayer = 1;
+    private int winningPlayer;
 
     public override void _Ready()
     {
@@ -51,6 +53,9 @@ public partial class GameManager : Node2D
                 messageLabel.Text = "";
                 ball.Serve(servingPlayer == 1 ? 1 : -1);
                 break;
+            case GameState.Done:
+                RestartGame();
+                break;
         }
     }
 
@@ -62,7 +67,7 @@ public partial class GameManager : Node2D
         player2Score++;
         UpdateScoreUI();
         servingPlayer = 1;
-        EnterServeState();
+        CheckWinOrServe(2);
     }
     
     private void OnRightGoalEntered(Node2D body)
@@ -75,7 +80,23 @@ public partial class GameManager : Node2D
         player1Score++;
         UpdateScoreUI();
         servingPlayer = 2;
-        EnterServeState();
+        CheckWinOrServe(1);
+    }
+
+    private void CheckWinOrServe(int scorer)
+    {
+        int scorerScore = scorer == 1 ? player1Score : player2Score;
+        if (scorerScore >= PointsToWin)
+        {
+            winningPlayer = scorer;
+            State = GameState.Done;
+            ball.Reset();
+            messageLabel.Text = $"Player {winningPlayer} wins!\nPress Enter to restart";
+        }
+        else
+        {
+            EnterServeState();
+        }
     }
 
     private void EnterServeState()
@@ -83,6 +104,15 @@ public partial class GameManager : Node2D
         ball.Reset();
         State = GameState.Serve;
         messageLabel.Text = $"Player {servingPlayer}'s serve!\nPress Enter";
+    }
+
+    private void RestartGame()
+    {
+        player1Score = 0;
+        player2Score = 0;
+        UpdateScoreUI();
+        servingPlayer = winningPlayer == 1 ? 2 : 1;
+        EnterServeState();
     }
 
     private void UpdateScoreUI()
